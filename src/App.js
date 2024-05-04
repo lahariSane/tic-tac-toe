@@ -14,22 +14,23 @@ function Board({ squares, onPlay }) {
 
   function bestMove(currentSquares) {
     if (calculateWinner(currentSquares) || isFull(currentSquares)) {
-      return;
-    }
-    var bestVal = -Infinity;
-    var bestMove;
-    for (var i = 0; i < 9; i++) {
-      if (currentSquares[i] == null) {
-        currentSquares[i] = 'O';
-        let score = minimax(currentSquares, 0, false);
-        currentSquares[i] = null;
-        if (score > bestVal) {
-          bestVal = score;
-          bestMove = i;
+      onPlay(currentSquares);
+    } else {
+      var bestVal = -Infinity;
+      var bestMove;
+      for (var i = 0; i < 9; i++) {
+        if (currentSquares[i] == null) {
+          currentSquares[i] = 'O';
+          let score = minimax(currentSquares, 0, false);
+          currentSquares[i] = null;
+          if (score > bestVal) {
+            bestVal = score;
+            bestMove = i;
+          }
         }
       }
+      currentSquares[bestMove] = 'O'
     }
-    currentSquares[bestMove] = 'O'
     return currentSquares;
   }
 
@@ -43,6 +44,9 @@ function Board({ squares, onPlay }) {
     let result = calculateWinner(currentSquares);
     if (result != null) {
       return scores[result];
+    }
+    else if(isFull(currentSquares)){
+      return 0;
     }
     if (isMaximizingPlayer) {
       let bestVal = -Infinity;
@@ -121,7 +125,7 @@ function Board({ squares, onPlay }) {
 
 export default function Game() {
   const [squares, setSquares] = useState(Array(9).fill(null));
-  
+
   function handlePlay(nextSquares) {
     setSquares(nextSquares);
   }
@@ -136,20 +140,20 @@ export default function Game() {
 }
 
 function calculateWinner(squares) {
-  for(let i=0;i<9;i += 3){
-    if(squares[i] != null && squares[i] === squares[i+1] && squares[i] === squares[i+2]){
+  for (let i = 0; i < 9; i += 3) {
+    if (squares[i] != null && squares[i] === squares[i + 1] && squares[i] === squares[i + 2]) {
       return squares[i];
     }
   }
-  for(let i=0;i<3;i += 1){
-    if(squares[i] != null && squares[i] === squares[i+3] && squares[i] === squares[i+6]){
+  for (let i = 0; i < 3; i += 1) {
+    if (squares[i] != null && squares[i] === squares[i + 3] && squares[i] === squares[i + 6]) {
       return squares[i];
     }
   }
-  if(squares[0] != null && squares[0] === squares[4] && squares[0] === squares[8]){
+  if (squares[0] != null && squares[0] === squares[4] && squares[0] === squares[8]) {
     return squares[0];
   }
-  if(squares[2] != null && squares[2] === squares[4] && squares[2] === squares[6]){
+  if (squares[2] != null && squares[2] === squares[4] && squares[2] === squares[6]) {
     return squares[2];
   }
   return null;
