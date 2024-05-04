@@ -87,10 +87,10 @@ function Board({ squares, onPlay }) {
   }
 
   function handleClick(i) {
-    if (calculateWinner(squares) || isFull(squares) || squares[i]) {
+    var nextSquares = squares.slice();
+    if (calculateWinner(squares) || isFull(squares) || nextSquares[i] != null) {
       return;
     }
-    var nextSquares = squares.slice();
     nextSquares[i] = 'X';
     nextSquares = bestMove(nextSquares);
     onPlay(nextSquares);
@@ -120,7 +120,7 @@ function Board({ squares, onPlay }) {
 }
 
 export default function Game() {
-  const [squares, setSquares] = useState([Array(9).fill(null)]);
+  const [squares, setSquares] = useState(Array(9).fill(null));
   
   function handlePlay(nextSquares) {
     setSquares(nextSquares);
@@ -136,23 +136,22 @@ export default function Game() {
 }
 
 function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+  for(let i=0;i<9;i += 3){
+    if(squares[i] != null && squares[i] === squares[i+1] && squares[i] === squares[i+2]){
+      return squares[i];
     }
+  }
+  for(let i=0;i<3;i += 1){
+    if(squares[i] != null && squares[i] === squares[i+3] && squares[i] === squares[i+6]){
+      return squares[i];
+    }
+  }
+  if(squares[0] != null && squares[0] === squares[4] && squares[0] === squares[8]){
+    return squares[0];
+  }
+  if(squares[2] != null && squares[2] === squares[4] && squares[2] === squares[6]){
+    return squares[2];
   }
   return null;
 }
 
-// var currentPlayer;
