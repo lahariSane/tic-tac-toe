@@ -49,7 +49,7 @@ function Board({ squares, onPlay }) {
       for (let i = 0; i < 9; i++) {
         if (currentSquares[i] == null) {
           currentSquares[i] = 'O';
-          let score = minimax(currentSquares, depth + 1, true);
+          let score = minimax(currentSquares, depth + 1, false);
           currentSquares[i] = null;
           bestVal = Math.max(bestVal, score);
         }
@@ -60,8 +60,8 @@ function Board({ squares, onPlay }) {
       let bestVal = Infinity;
       for (let i = 0; i < 9; i++) {
         if (currentSquares[i] == null) {
-          currentSquares[i] = 'O';
-          let score = minimax(currentSquares, depth + 1, false);
+          currentSquares[i] = 'X';
+          let score = minimax(currentSquares, depth + 1, true);
           currentSquares[i] = null;
           bestVal = Math.min(bestVal, score);
         }
