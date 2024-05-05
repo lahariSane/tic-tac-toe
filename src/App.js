@@ -58,7 +58,7 @@ function Board({ squares, onPlay }) {
           currentSquares[i] = null;
           bestVal = Math.max(bestVal, score);
         }
-        if(bestVal == 1) break;
+        if(bestVal === 1) break;
       }
       return bestVal;
     }
@@ -71,7 +71,7 @@ function Board({ squares, onPlay }) {
           currentSquares[i] = null;
           bestVal = Math.min(bestVal, score);
         }
-        if(bestVal == -1) break;
+        if(bestVal === -1) break;
       }
       return bestVal;
     }
