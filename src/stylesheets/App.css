@@ -1,0 +1,16 @@
+.board{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.status{
+  font-weight: 700;
+}
+
+.board-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

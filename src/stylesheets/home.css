@@ -1,0 +1,13 @@
+.main{
+    margin: 10rem 45rem;
+    width: 20rem;
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(108, 129, 108);
+    color: azure;
+    border-radius: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
