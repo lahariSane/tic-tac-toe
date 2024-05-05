@@ -1,12 +1,13 @@
-// import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
   return (
-    <button className="square" onClick={onSquareClick}>
-      {value}
-    </button>
+    <>
+      <button className="square" onClick={onSquareClick}>
+        {value}
+      </button>
+    </>
   );
 }
 
@@ -45,7 +46,7 @@ function Board({ squares, onPlay }) {
     if (result != null) {
       return scores[result];
     }
-    else if(isFull(currentSquares)){
+    else if (isFull(currentSquares)) {
       return 0;
     }
     if (isMaximizingPlayer) {
@@ -57,6 +58,7 @@ function Board({ squares, onPlay }) {
           currentSquares[i] = null;
           bestVal = Math.max(bestVal, score);
         }
+        if(bestVal == 1) break;
       }
       return bestVal;
     }
@@ -69,6 +71,7 @@ function Board({ squares, onPlay }) {
           currentSquares[i] = null;
           bestVal = Math.min(bestVal, score);
         }
+        if(bestVal == -1) break;
       }
       return bestVal;
     }
@@ -104,20 +107,22 @@ function Board({ squares, onPlay }) {
   return (
     <>
       <div className="status">{status}</div>
-      <div className="board-row">
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+      <div className='board'>
+        <div className="board-row">
+          <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
+          <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
+          <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+        </div>
+        <div className="board-row">
+          <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
+          <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
+          <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
+        </div>
+        <div className="board-row">
+          <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
+          <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
+          <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+        </div>
       </div>
     </>
   );
