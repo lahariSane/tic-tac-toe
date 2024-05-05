@@ -3,7 +3,7 @@ import calculateWinner from "./winner";
 import isFull from "./isFull";
 import alphabeta from "./alphabeta";
 
-export default function Board({ squares, onPlay }) {
+export default function Board({ squares, symbol, onPlay }) {
     function bestMove(currentSquares) {
       if (calculateWinner(currentSquares) || isFull(currentSquares)) {
         onPlay(currentSquares);
@@ -12,8 +12,8 @@ export default function Board({ squares, onPlay }) {
         var bestMove;
         for (var i = 0; i < 9; i++) {
           if (currentSquares[i] == null) {
-            currentSquares[i] = 'O';
-            let score = alphabeta(currentSquares, 0, false);
+            currentSquares[i] = symbol === 'X'?'O':'X';
+            let score = alphabeta(currentSquares, 0, false,symbol);
             currentSquares[i] = null;
             if (score > bestVal) {
               bestVal = score;
@@ -21,7 +21,7 @@ export default function Board({ squares, onPlay }) {
             }
           }
         }
-        currentSquares[bestMove] = 'O'
+        currentSquares[bestMove] = symbol === 'X'?'O':'X'
       }
       return currentSquares;
     }
@@ -40,7 +40,7 @@ export default function Board({ squares, onPlay }) {
       if (calculateWinner(squares) || isFull(squares) || nextSquares[i] != null) {
         return;
       }
-      nextSquares[i] = 'X';
+      nextSquares[i] = symbol;
       nextSquares = bestMove(nextSquares);
       onPlay(nextSquares);
     }
