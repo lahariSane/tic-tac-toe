@@ -5,8 +5,8 @@ export default function alphabeta(currentSquares, depth, isMaximizingPlayer,symb
   const otherSymbol = symbol === 'X'? 'O':'X';
     let result = calculateWinner(currentSquares);
     if (result != null) {
-      if(result === symbol) return -1;
-      if(result === otherSymbol) return 1;
+      if(result === symbol) return -1*(9-depth);
+      if(result === otherSymbol) return 1*(9-depth);
     }
     else if (isFull(currentSquares)) {
       return 0;
