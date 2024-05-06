@@ -1,7 +1,14 @@
-.main{
-    margin: 10rem 45rem;
-    width: 20rem;
-    height: 30rem;
+html,#root {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main {
+    margin: 10% auto;
+    width: 30%;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,7 +19,14 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.square a{
+.square a {
     text-decoration: none;
     color: white;
+}
+
+@media screen and (max-width:767px) {
+    .main {
+        width: 350px;
+        height: 50%;
+    }
 }
