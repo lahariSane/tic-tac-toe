@@ -7,7 +7,7 @@ html,#root {
 
 .main {
     margin: 10% auto;
-    width: 30%;
+    width: 40vh;
     height: 70vh;
     display: flex;
     flex-direction: column;
