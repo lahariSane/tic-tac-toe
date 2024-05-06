@@ -1,7 +1,7 @@
 import calculateWinner from "./winner";
 import isFull from "./isFull";
 
-export default function alphabeta(currentSquares, depth, isMaximizingPlayer,symbol) {
+export default function alphabeta(currentSquares, depth, isMaximizingPlayer,symbol,alpha,beta) {
   const otherSymbol = symbol === 'X'? 'O':'X';
     let result = calculateWinner(currentSquares);
     if (result != null) {
@@ -16,11 +16,12 @@ export default function alphabeta(currentSquares, depth, isMaximizingPlayer,symb
       for (let i = 0; i < 9; i++) {
         if (currentSquares[i] == null) {
           currentSquares[i] = otherSymbol;
-          let score = alphabeta(currentSquares, depth + 1, false,symbol);
+          let score = alphabeta(currentSquares, depth + 1, false,symbol,alpha,beta);
           currentSquares[i] = null;
-          bestVal = Math.max(bestVal, score);
+          alpha = Math.max(bestVal, score);
+          bestVal = alpha;
         }
-        if(bestVal === 1) break;
+        if(alpha >= beta) break;
       }
       return bestVal;
     }
@@ -29,11 +30,12 @@ export default function alphabeta(currentSquares, depth, isMaximizingPlayer,symb
       for (let i = 0; i < 9; i++) {
         if (currentSquares[i] == null) {
           currentSquares[i] = symbol;
-          let score = alphabeta(currentSquares, depth + 1, true,symbol);
+          let score = alphabeta(currentSquares, depth + 1, true,symbol,alpha,beta);
           currentSquares[i] = null;
-          bestVal = Math.min(bestVal, score);
+          beta = Math.min(bestVal, score);
+          bestVal = beta;
         }
-        if(bestVal === -1) break;
+        if(alpha >= beta) break;
       }
       return bestVal;
     }

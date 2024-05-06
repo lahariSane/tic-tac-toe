@@ -14,7 +14,7 @@ export default function Board({ squares, symbol, onPlay }) {
       for (var i = 0; i < 9; i++) {
         if (currentSquares[i] == null) {
           currentSquares[i] = oppSymbol;
-          let score = alphabeta(currentSquares, 0, false, symbol);
+          let score = alphabeta(currentSquares, 0, false, symbol,-Infinity,Infinity);
           currentSquares[i] = null;
           if (score > bestVal) {
             bestVal = score;
